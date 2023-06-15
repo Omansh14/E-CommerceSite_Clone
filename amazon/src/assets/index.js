@@ -4,7 +4,7 @@ import bannerImageTwo from './Banner/bannerImgOne.jpg';
 import bannerImageThree from'./Banner/bannerImgThree.jpg';
 import bannerImageFour from './Banner/bannerImgFour.jpg';
 import bannerImageFive from './Banner/bannerImgFive.jpg';
-import bdFlag from './bdFlag.webp';
+import Indian_Flag from './Indian_Flag.webp';
 import emptyCart from './emptyCart.png';
 
 export {
@@ -14,6 +14,6 @@ export {
     bannerImageThree,
     bannerImageFour,
     bannerImageFive,
-    bdFlag,
+    Indian_Flag,
     emptyCart,
 }

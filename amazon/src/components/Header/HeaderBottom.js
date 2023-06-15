@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import { AccountCircleRounded } from "@mui/icons-material";
 import { Close } from "@mui/icons-material";
-import SideNavContent from "../SideNavContent";
+import SideNavContent from "../Header/SideNavContent";
 import {motion} from "framer-motion";
 
 const HeaderBottom = () => {

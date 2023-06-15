@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import { logo } from "../../assets/index";
-import { ArrowDropDownOutlined, Search } from "@mui/icons-material";
+import { ArrowDropDownOutlined } from "@mui/icons-material";
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { allItems } from "../../constants/HeaderItems";
+import { allItems } from "../../constants/constants";
 import HeaderBottom from "./HeaderBottom";
 
 const Header = () => {
