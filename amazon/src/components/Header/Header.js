@@ -12,7 +12,7 @@ const Header = () => {
   const dropDownItems = allItems;
 
   return (
-    <div className="w-full">
+    <div className="w-full sticky top-0 z-50">
       <div className="w-full bg-amazon_blue text-white px-4 py-3 flex items-center gap-4">
         {/*================= Image Start Here ===============================*/}
         <div className="px-2 h-[80%] flex items-center border border-transparent hover:border-white cursor-pointer duration-100">
