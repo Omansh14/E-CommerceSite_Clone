@@ -1,14 +1,27 @@
 import React from "react";
 import { useLoaderData } from "react-router-dom";
 import StarIcon from "@mui/icons-material/Star";
-import StartIconOutlined from "@mui/icons-material/StarRateOutlined";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import ApiIcon from "@mui/icons-material/Api";
+import { useDispatch, useSelector } from "react-redux";
+import {addToCart, removeFromCart}  from "../../redux/actions/action";
+
 const Products = () => {
   const data = useLoaderData();
   const productData = data.data;
+  const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart);
+  const cartItems = cart?.cartItems;
+
+  // useEffect(() => {
+
+  // }, []);
+
+  const removeProduct = (id) => {
+    const filteredItem = cartItems.filter((ele) => ele.id !== id );
+    dispatch(removeFromCart(filteredItem));
+  }
 
   return (
     <div className="max-w-screen-2xl mx-auto grid grid-cols-4 gap-10 px-4">
@@ -28,13 +41,9 @@ const Products = () => {
               alt="productImage"
             />
             <ul className="w-full h-36 bg-gray-100 absolute bottom-[-170px] flex flex-col items-end justify-center gap-2 font-titleFont px-2 border-1 border-r group-hover:bottom-0 duration-700">
-              <li className="productLi">
-                Compare{" "}
-                <span>
-                  <ApiIcon />
-                </span>
-              </li>
-              <li className="productLi">
+              <li className="productLi" 
+              onClick={() => {removeProduct(item.id)}}
+              >
                 Add to Cart{" "}
                 <span>
                   <ShoppingCartIcon />
@@ -70,16 +79,18 @@ const Products = () => {
                 {item?.description.substring(0, 100)}....
               </p>
               <div className="text-yellow-500">
-                <StarIcon />
-                <StarIcon />
-                <StarIcon />
-                <StarIcon />
-                <StartIconOutlined />
+                {[...Array(Math.floor(Math.random() * 5 + 1))].map((item) => (
+                  <StarIcon  key={Math.random()} />
+                ))}
               </div>
               <button
                 className="w-full font-titleFont font-medium text-base bg-gradient-to-tr from-yellow-400 to-yellow-200
               border hover:from-yellow-300 hover:to-yellow-500 hover:border-yellow-700 active:bg-gradient-to-bl
               active:from-yellow-400 active:to-yellow-500 duration-200 py-1.5 rounded-md mt-3"
+
+              onClick={() => {
+                dispatch(addToCart(item));
+              }}
               >
                 Add to Cart
               </button>
