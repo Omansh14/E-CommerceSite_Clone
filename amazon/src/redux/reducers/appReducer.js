@@ -7,13 +7,13 @@ const appReducer = (currentState, action) => {
         case 'REQUEST_PRODUCT_DATA':
             return {
                 ...state,
-                productLoadingState: 'Loading',
+                productLoadingState: 'LOADING',
             }
 
         case 'RECEIVE_PRODUCT_DATA':
             return {
                 ...state,
-                productLoadingState: 'Loaded',
+                productLoadingState: 'LOADED',
                 products: action.payload,
             }
 

@@ -20,13 +20,29 @@ export const removeFromCart = (data) => {
     }
 }
 
+export const addToWishlist = (data) => {
+    return {
+        type: 'ADD_TO_WISHLIST',
+        payload: data,
+    }
+}
+
+export const removeFromWishList = (data) => {
+    return {
+        type: 'REMOVE_FROM_WISHLIST',
+        payload: data,
+    }
+}
+
 export const fetchProductData = () => {
     return (dispatch) => {
         dispatch({type: 'REQUEST_PRODUCT_DATA'});
 
         axios.get("https://fakestoreapi.com/products")
         .then((res) => {
-            dispatch({type:'RECEIVE_PRODUCT_DATA', payload: res.data});
+            const data = res.data;
+            const mappedData = data.map((item) => ({...item, addToCart: false, addToWishlist: false}));
+            dispatch({type:'RECEIVE_PRODUCT_DATA', payload: mappedData});
         })
         .catch((err) => {
             dispatch({type: 'ERROR_PRODUCT_DATA', error: err.message });

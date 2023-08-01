@@ -1,12 +1,13 @@
 const initialState = {
     app: {
         user: [],
-        productLoadingState: 'Unitialized',
+        productLoadingState: 'UNINITIALIZED',
         products: [],
         errorProductLoading: "",
     },
     cart: {
         cartItems: [],
+        wishListItems: [],
     }
 };
 

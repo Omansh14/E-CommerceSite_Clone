@@ -1,25 +1,37 @@
 import initialState from "./initialState";
-import {ADD_TO_CART, REMOVE_FROM_CART} from "../actions/action"
+import { ADD_TO_CART, REMOVE_FROM_CART } from "../actions/action";
 
 const appReducer = (currentState, action) => {
-    const state = currentState || initialState?.cart;
+  const state = currentState || initialState?.cart;
 
-    switch (action.type) {
-        
-        case ADD_TO_CART :
-            return {
-                ...state,
-                cartItems:[...state.cartItems, action.payload] ,
-            };
+  switch (action.type) {
+    case ADD_TO_CART:
+      return {
+        ...state,
+        cartItems: action.payload,
+      };
 
-        case REMOVE_FROM_CART : 
-            return {
-                ...state,
-                cartItems:action.data,
-            }
+    case REMOVE_FROM_CART:
+      return {
+        ...state,
+        cartItems: action.payload,
+      };
 
-        default: return state;
-    }
-}
+    case "ADD_TO_WISHLIST":
+      return {
+        ...state,
+        wishListItems: action.payload,
+      };
+
+    case "REMOVE_FROM_WISHLIST":
+      return {
+        ...state,
+        wishListItems: action.data,
+      };
+
+    default:
+      return state;
+  }
+};
 
 export default appReducer;
