@@ -8,11 +8,15 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { allItems } from "../../constants/constants";
 import HeaderBottom from "./HeaderBottom";
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const [showAll, setShowAll] = useState(false);
   const ref = useRef();
   const dropDownItems = allItems;
+
+  const cart = useSelector((state) => state.cart);
+  const cartItems = cart?.cartItems;
 
   useEffect(() => {
     document.body.addEventListener("click", (e) => {
@@ -64,15 +68,15 @@ const Header = () => {
               <div>
                 <ul
                   ref={ref}
-                  className="absolute w-56 h-80 top-10 left-0 overflow-y-scroll
-                            overflow-x-hidden bg-white bordr-[1px] border-amazon_blue text-black p-2
-                            flex-col gap-1 z-50"
+                  className="mt-1 absolute w-48 h-32 top-10 left-0 overflow-y-scroll
+                            overflow-x-hidden bg-gray-100 border-[1px] border-amazon_blue text-black p-2
+                            flex-col gap-1 z-50 rounded-md"
                 >
                   {dropDownItems.map((item) => (
                     <li
                       key={item.id}
-                      className="text-sm tracking-wide font-titleFont border-b-[1px]
-                                        border-b-transparent hover:border-b-amazon_blue cursor-pointer duration-200"
+                      className="flex flex-row justify-center text-sm tracking-wide p-0.5 font-semibold hover:text-blue-600 border-b-[1px]
+                                        border-b-transparent cursor-pointer duration-200"
                     >
                       {item.title}
                     </li>
@@ -110,6 +114,7 @@ const Header = () => {
         {/*================= Signin End Here ===============================*/}
 
         {/*================= Orders Start Here ===============================*/}
+        <Link to="/wishlist">
         <div className="flex flex-col items-center justify-center headHover gap-2">
           {/* <p className="text-xs text-light_text font-light">Returns</p> */}
           <FavoriteIcon/>
@@ -117,6 +122,7 @@ const Header = () => {
             WishList
           </p>
         </div>
+        </Link>
         {/*================= Orders End Here ===============================*/}
 
         {/*================= Cart Start Here ===============================*/}
@@ -129,7 +135,7 @@ const Header = () => {
                 className="absolute text-xs -top-1 left-6 semibold p-1 h-4 bg-[#f3a847] text-amazon_blue
                 rounded-full flex justify-center items-center"
               >
-                0
+                {cartItems.length}
               </span>
             </p>
           </Link>
