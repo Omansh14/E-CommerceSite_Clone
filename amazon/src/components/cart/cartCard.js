@@ -10,6 +10,7 @@ const CartCard = ({ cardDetails }) => {
   const handleQuantity = (id,flag) => {
   const index = cartItems.findIndex((item) => item.id === id);
   const newItems = cartItems;
+
   if(flag){
     newItems[index].quantity+=1;
   } else {

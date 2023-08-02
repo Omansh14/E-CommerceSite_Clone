@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -12,6 +12,8 @@ import Home from "./components/Home/Home";
 import ShoppingCart from "./containers/shoppingCart";
 import Login from "./components/login";
 import WishList from "./containers/wishList";
+import { useDispatch } from "react-redux";
+import { fetchProductData } from "./redux/actions/action";
 
 const Layout =() => {
   return(
@@ -32,6 +34,12 @@ function App() {
       </Route>
 
   ))
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchProductData());
+  }, [dispatch])
+
   return (
     <div className="font-bodyFont bg-gray-100">
       <RouterProvider router={router}></RouterProvider>

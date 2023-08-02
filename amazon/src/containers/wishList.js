@@ -5,17 +5,23 @@ import { addToCart, removeFromWishList } from '../redux/actions/action';
 
 const WishList = () => {
     const {wishListItems, cartItems} = useSelector((state) => state.cart);
+    const {products} = useSelector((state) => state.app);
     const dispatch = useDispatch();
     const handleWishListItems = (id, flag) => {
-        const index = wishListItems.findIndex((ele) => ele.id === id);
+        const index1 = wishListItems.findIndex((ele) => ele.id === id);
         const newList = wishListItems;
+        const index2 = products.findIndex((ele) => ele.id === id);
+        const newProducts = products;
       if(flag) {
         //remove from wishList and add to cart
-        const newCartItems = [...cartItems, newList[index]];
+        const newCartItems = [...cartItems, newList[index1]];
         dispatch(addToCart(newCartItems));
+        newProducts[index2].addToCart = true;
       }
-        newList.splice(index, 1);
+        newList.splice(index1, 1);
+        newProducts[index2].addToWishlist = false;
         dispatch(removeFromWishList(newList));
+        dispatch({ type: "RECEIVE_PRODUCT_DATA", payload: newProducts });
     }
   return (
     <div>

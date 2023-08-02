@@ -37,7 +37,7 @@ const Products = () => {
       const newList= wishListItems.filter((ele) => ele.id !==item.id);
       dispatch(removeFromWishList(newList));
     } else {
-      const data = [...wishListItems, {...item, quantity: 1}];
+      const data = [...wishListItems, {...item, quantity: 1, addToWishlist: true}];
       newItems[index].addToWishlist = true;
       dispatch(addToWishlist(data));
     }
