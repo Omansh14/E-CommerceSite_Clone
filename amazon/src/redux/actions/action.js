@@ -28,7 +28,7 @@ export const removeFromWishList = (data) => {
     }
 }
 
-export const fetchProductData = () => {
+export const fetchProductData = (item) => {
     return (dispatch) => {
         dispatch({type: 'REQUEST_PRODUCT_DATA'});
 
@@ -36,7 +36,8 @@ export const fetchProductData = () => {
         .then((res) => {
             const data = res.data;
             const mappedData = data.map((item) => ({...item, addToCart: false, addToWishlist: false}));
-            dispatch({type:'RECEIVE_PRODUCT_DATA', payload: mappedData});
+            const filteredData = mappedData.filter((ele) => ele.category === item);
+            dispatch({type:'RECEIVE_PRODUCT_DATA', payload: item? filteredData : mappedData});
         })
         .catch((err) => {
             dispatch({type: 'ERROR_PRODUCT_DATA', error: err.message });

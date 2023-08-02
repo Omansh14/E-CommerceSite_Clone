@@ -10,14 +10,13 @@ import HeaderBottom from "./HeaderBottom";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { useSelector } from "react-redux";
 
-const Header = () => {
+const Header = ({filterData, setFilterData}) => {
   const [showAll, setShowAll] = useState(false);
   const ref = useRef();
   const dropDownItems = allItems;
 
   const cart = useSelector((state) => state.cart);
   const cartItems = cart?.cartItems;
-
   useEffect(() => {
     document.body.addEventListener("click", (e) => {
       if (e.target.contains(ref.current)) {
@@ -56,11 +55,11 @@ const Header = () => {
         <div className="h-10 flex flex-grow relative">
           <span
             onClick={() => setShowAll(!showAll)}
-            className="w-14 h-full bg-gray-200 hover:bg-gray-300 border-2 
+            className="w-auto p-1 h-full bg-gray-200 hover:bg-gray-300 border-2 
                 cursor-pointer duraion-300 text-sm text-amazon_blue font-titleFont flex
                 items-center justify-center rounded-t1-md rounded-b1-md"
           >
-            All<span></span>
+            {filterData ? filterData : 'All'}<span></span>
             <ArrowDropDownOutlined />
           </span>
           <div>
@@ -77,6 +76,14 @@ const Header = () => {
                       key={item.id}
                       className="flex flex-row justify-center text-sm tracking-wide p-0.5 font-semibold hover:text-blue-600 border-b-[1px]
                                         border-b-transparent cursor-pointer duration-200"
+                      onClick={() => {
+                        if(item.title === 'All'){
+                          setFilterData(null);
+                        } else {
+                          setFilterData(item.title);
+                        }    
+                        setShowAll(!showAll);
+                      }}
                     >
                       {item.title}
                     </li>

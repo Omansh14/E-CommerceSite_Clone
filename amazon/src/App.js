@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -15,18 +15,19 @@ import WishList from "./containers/wishList";
 import { useDispatch } from "react-redux";
 import { fetchProductData } from "./redux/actions/action";
 
-const Layout =() => {
+const Layout =({filterData, setFilterData}) => {
   return(
     <div>
-      <Header/>
+      <Header filterData={filterData} setFilterData={setFilterData}/>
       <Outlet/>
       <Footer/>
     </div>
   )
 }
 function App() {
+  const [filterData, setFilterData] = useState();
   const router = createBrowserRouter(createRoutesFromElements(
-      <Route path="/" element={<Layout/>}>
+      <Route path="/" element={<Layout filterData={filterData} setFilterData={setFilterData}/>}>
         <Route index element={<Home/>}></Route>
         <Route path="/cart" element={<ShoppingCart/>}></Route>
         <Route path="/wishlist" element={<WishList/>}></Route>
@@ -37,8 +38,8 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchProductData());
-  }, [dispatch])
+    dispatch(fetchProductData(filterData ? filterData.toLowerCase() : null));
+  }, [dispatch, filterData])
 
   return (
     <div className="font-bodyFont bg-gray-100">

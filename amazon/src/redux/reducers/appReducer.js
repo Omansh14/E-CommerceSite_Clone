@@ -22,6 +22,12 @@ const appReducer = (currentState, action) => {
                 ...state,
                 errorProductLoading : action.error,
             }
+
+        case 'RECEIVE_FILTERED_PRODUCTS' :
+            return {
+                ...state,
+                filfilteredProducts: action.payload,
+            }
         
         default: return state;
     }

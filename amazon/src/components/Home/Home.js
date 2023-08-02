@@ -1,22 +1,22 @@
-import React from 'react';
-import Banner from './Banner';
-import Products from './Products';
-// import { fetchProductData } from '../../redux/actions/action';
-// import { useDispatch } from 'react-redux';
+import React from "react";
+import Banner from "./Banner";
+import Products from "./Products";
+import { useSelector } from "react-redux";
 
 const Home = () => {
-    // const dispatch = useDispatch();
-
-    // useEffect(() => {
-    //   dispatch(fetchProductData());
-    // }, [dispatch])
-    return (
-        <div>
-            <Banner/>
-            <Products/>
-            
+  const { productLoadingState } = useSelector((state) => state.app);
+  return (
+    <div>
+      <Banner />
+      {productLoadingState !== "LOADED" ? (
+        <div className="h-48 flex flex-row justify-center items-center text-blue-500 font-semibold text-lg ">
+          Loading Products...
         </div>
-    )
-}
+      ) : (
+        <Products />
+      )}
+    </div>
+  );
+};
 
 export default Home;

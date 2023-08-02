@@ -9,7 +9,7 @@ export const allItems = [
   },
   {
     id: Math.random(),
-    title: "Jwellery",
+    title: "Jewelery",
   },
   {
     id: Math.random(),

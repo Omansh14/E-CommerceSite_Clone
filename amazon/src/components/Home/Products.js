@@ -45,7 +45,7 @@ const Products = () => {
   }
 
   return (
-    <div className="max-w-screen-2xl mx-auto grid grid-cols-4 gap-10 px-4">
+    <div className="max-w-screen-2xl mx-auto grid grid-cols-4 gap-10 px-4 mb-2">
       {productData.map((item, idx) => (
         <div
           className="bg-white h-auto border-[1px] border-gray-200 py-6 z-30 hover:border-transparent
